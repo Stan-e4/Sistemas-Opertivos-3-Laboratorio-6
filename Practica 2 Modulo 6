@@ -1,0 +1,46 @@
+Practica 2: Firewalls (iptables y UFW)
+Importante: Asegúrate de tener instalados los servicios: sudo apt install 
+apache2 vsftpd openssh-server -y
+Bloquear (DROP):
+
+Bash
+sudo iptables -A INPUT -p tcp --dport 80 -j DROP
+sudo iptables -A INPUT -p tcp --dport 21 -j DROP
+sudo iptables -A INPUT -p tcp --dport 22 -j DROP
+
+Desde donde haces la prueba: Tu máquina física (Host).
+
+Hacia donde apuntas: La dirección IP de tu máquina virtual (VM) con Linux.
+
+Comando: ping [IP_DE_TU_VM]
+Prueba la conexión; debería quedarse en "timeout".
+Habilitar (Borrar reglas):
+
+Bash
+sudo iptables -F
+Fase 2: UFW (Capa Debian/Mint)
+sudo ufw deny 80/tcp
+sudo ufw deny 21/tcp
+sudo ufw deny 22/tcp
+sudo ufw enable
+
+Habilitar:
+
+Bash
+sudo ufw allow 80/tcp
+sudo ufw allow 21/tcp
+sudo ufw allow 22/tcp
+
+Prueba de HTTP (Puerto 80)
+Desde el Host: Abre un navegador y escribe
+ http://[IP_del_servidor] o usa la terminal
+Prueba de FTP (Puerto 21)
+Desde el Host:
+
+Bash
+ftp [IP_del_servidor]
+Prueba de SSH (Puerto 22)
+Desde el Host:
+
+Bash
+ssh usuario@[IP_del_servidor]
