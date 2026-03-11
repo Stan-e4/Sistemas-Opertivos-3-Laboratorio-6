@@ -1,0 +1,8 @@
+Practica 1 
+sudo apt update && sudo apt install gnupg2 -y
+mkdir practica_cifrado && cd practica_cifrado
+echo "Este es un mensaje secreto" > secreto.txt
+gpg2 -c secreto.txt
+Intento de acceso: Intenta leerlo con cat secreto.txt.gpg.
+ Verás caracteres extraños (binario cifrado).
+gpg2 -d secreto.txt.gpg (Para decifrar)
