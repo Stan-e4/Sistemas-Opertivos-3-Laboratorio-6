@@ -1,0 +1,23 @@
+Practica 4: 2FA para SSH (Google Authenticator)
+sudo apt install libpam-google-authenticator -y
+Configuración de Usuario:
+Ejecuta google-authenticator. Responde y (sí) a todas las preguntas. 
+Escanea el código QR con tu móvil o ingresa la clave
+secreta en la App. Guarda los códigos de emergencia.
+Configurar PAM:
+
+Bash
+sudo nano /etc/pam.d/sshd
+Añade al final: auth required pam_google_authenticator.so
+
+Configurar SSH:
+
+Bash
+sudo nano /etc/ssh/sshd_config
+Busca y cambia: KbdInteractiveAuthentication yes
+ (o ChallengeResponseAuthentication yes en versiones viejas).
+
+Reiniciar: sudo systemctl restart ssh
+
+Nota Crítica: No cierres tu sesión actual de SSH hasta confirmar que puedes
+ entrar en una nueva ventana, o podrías quedar bloqueado.
