@@ -8,6 +8,13 @@ alert icmp any any -> $HOME_NET any (msg:"ICMP Detectado"; sid:1000001; rev:1;)
 alert tcp any any -> $HOME_NET 21 (msg:"Intento FTP detectado"; sid:1000002; rev:1;)
 alert tcp any any -> $HOME_NET 22 (msg:"Intento SSH detectado"; sid:1000003; rev:1;)
 alert tcp any any -> $HOME_NET 80 (msg:"Intento HTTP detectado"; sid:1000004; rev:1;)
+sudo nano /etc/snort/snort.conf
+Busca esta línea: (Usa Ctrl + W y escribe HOME_NET para encontrarla rápido).
+ipvar HOME_NET any
+
+Cámbiala por tu red real:
+ipvar HOME_NET 192.168.1.0/24
+
 Ejecución
 sudo snort -A console -q -u snort -g snort -c /etc/snort/snort.conf
 Desde tu Host, haz un ping o intenta entrar por SSH a la VM y verás las alertas en la consola.
