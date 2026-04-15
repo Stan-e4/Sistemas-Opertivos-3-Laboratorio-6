@@ -22,3 +22,9 @@ Desde tu Host, haz un ping o intenta entrar por SSH a la VM y verás las alertas
 alert icmp any any -> any any (msg:"ICMP Detectado"; sid:1000001; rev:1;)
 alert tcp any any -> any 22 (msg:"Intento SSH detectado"; sid:1000002; rev:1;)
 alert tcp any any -> any 80 (msg:"Trafico Web detectado"; sid:1000003; rev:1;)
+*********************************************************************************
+
+Error Común,Causa,Solución
+Snort: Fatall Error! Unknown interface,Pusiste eth0 pero en Ubuntu se llama ens3 o enp0s3.,Corre el comando ip addr y busca el nombre real de tu interfaz de red.
+Snort no genera alertas,No guardaste el archivo local.rules o no incluiste la ruta en snort.conf.,Revisa que al final de snort.conf diga: include $RULE_PATH/local.rules.
+Bloqueo total (SSH muerto),Ejecutaste ufw deny 22 y te sacó de tu propio servidor.,"¡Cuidado! Primero haz ufw allow 22/tcp y luego activa el resto. Si te bloqueas, usa la consola web de DigitalOcean."
