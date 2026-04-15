@@ -20,9 +20,10 @@ Bash
 sudo iptables -F
 Fase 2: UFW (Capa Debian/Mint)
 sudo ufw deny 80/tcp
-sudo ufw deny 21/tcp
+sudo ufw deny 21/tcp *
 sudo ufw deny 22/tcp
-sudo ufw enable
+ufw deny proto icmp
+sudo ufw enable *
 
 Habilitar:
 
